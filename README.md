@@ -130,7 +130,8 @@ created、mounted操作渲染后的Dom，视图更新后对新的视图进行操
 \<span v-for="(item,index) in arr"\>{{item}}\<\/span\>  
 \<input type="text" name="" ref="btn" v-show='isShow'\>  
 \<button  @click="nexttickfun"\>push\<\/button\>   
->data(){  
+>   
+data(){  
 	return {  
 		arr:[1,2,3,4,5],  
 		isShow:false  
@@ -140,7 +141,6 @@ created(){
 	console.log(this.arr+'init')  
 	this.arr.push(6);  
 	console.log(this.arr+'push');  
-	
 	this.$nextTick(function(){  
 		this.$refs.btn.value='666';  
 	})  
