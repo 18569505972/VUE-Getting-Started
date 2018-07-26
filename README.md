@@ -18,7 +18,8 @@ vue实例从创建到销毁的过程，开始创建、初始化数据、编译�
 子：  
 (1)   
 父：  
-\<component msg='' v-bind:str='str' v-bind:arr='arr'\>\<\/component>
+```javascript
+<component msg='' v-bind:str='str' v-bind:arr='arr'></component>
 export default {  
 	name:'app',  
 	data:{  
@@ -27,8 +28,10 @@ export default {
 			arr:[1,2,3]
 		}  
 	}  
-}
+}  
+```
 子：  
+```javascript
 props:{  
 	str:{  
 		type:'String',  
@@ -41,9 +44,11 @@ props:{
 		default:[]  
 	}  
 }   
+```
 (2)$parent  
 父：  
- \<component \>\<\/component\\\>
+```javascript
+ <component></component>
 export default {  
 	name:'app',  
 	data:{  
@@ -52,16 +57,20 @@ export default {
 			arr:[1,2,3]
 		}  
 	}  
-}
+}  
+```
 子：  
+```javascript
 mounted(){  
 	this.$parent.str='8899';  
 } 
+```
 ### 子组件向父组件传参：  
 (1) $emit   
 子：  
-\<component msg=''\ v-bind:str='str' v-bind:arr='arr' @click="childMsg">\<\/component>
-\<div\>{childmsg}\<\/div\>
+```javascript
+<component msg='' v-bind:str='str' v-bind:arr='arr' @click="childMsg"></component>
+<div>{childmsg}</div>
 export default {  
 	name:'app',  
 	data(){  
@@ -75,7 +84,9 @@ export default {
 		}
 	}  
 }
+```
 父：  
+```javascript
 data(){  
 	return {  
 		msg:'123'  
@@ -84,10 +95,12 @@ data(){
 mounted(){  
 	this.$emit('childMsg',{msg:this.msg});  
 }  
+```
 (2)$refs、ref(渲染完成后生成)   
-父：  
- \<component ref="child" \>\<\/component>
-\<div\>{childmsg}\<\/div\>
+父： 
+```javascript 
+<component ref="child" ></component>
+<div>{childmsg}</div>
 export default {  
 	name:'app',  
 	data(){  
@@ -99,21 +112,27 @@ export default {
 		console.log(this.$refs.child.msg) \\123  
 	}  
 }
-子：  
+```
+子： 
+```javascript 
 data(){  
 	return {  
 		msg:'123'  
 	}  
 }    
+```
 ## vue-router组件复用  
 ### 原因：  
+```javascript
 {  
   path：'music/:musicId',  
   name:'music',    
   component: resolve => require(['./component/music.vue'],resolve)  
 }  
+```
 路由参数发生改变，但vue-router认为访问的是music.vue，由于music.vue已经渲染，所以直接复用，不会执行初始生命周期函数。  
 ### 解决方法：  
+```javascript
 watch:{  
 	'$route':function(to,from){  
 		if(to.name=='music'){  
@@ -121,6 +140,7 @@ watch:{
 		}  
 	}  
 }  
+```
 ## $nextTick  
 ### 由来：  
 vue数据驱动视图更新，是异步的，及修改数据的当下，视图不会更新，等同一事件循环中所有数据变化完成后，在统一进行更新。  
@@ -157,9 +177,18 @@ methods:{
 ## vue优化  
 ### 项目优化：  
 #### 懒加载（按需加载）方式：  
-1、vue异步组件技术：resolve => require(['@/components/name'],resolve)  
-2、es import：() => import('@/components/name')  
-3、webpack require.ensure():r => require.ensure([],() => r(require('@/components/name'),'name'))
+1、vue异步组件技术：  
+```javascript
+resolve => require(['@/components/name'],resolve)  
+```
+2、es import：  
+```javascript
+() => import('@/components/name')  
+```
+3、webpack   
+```javascript
+require.ensure():r => require.ensure([],() => r(require('@/components/name'),'name'))  
+```
 
   
 
