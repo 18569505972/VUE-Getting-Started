@@ -58,7 +58,7 @@ mounted(){
 	this.$parent.str='8899';  
 } 
 ### 子组件向父组件传参：  
-(1) $emit 
+(1) $emit   
 子：  
 \<component msg=''\ v-bind:str='str' v-bind:arr='arr' @click="childMsg">\<\/component\>
 \<div\>{childmsg}\<\/div\>
@@ -109,7 +109,7 @@ data(){
 ### 原因：  
 {  
   path：'music/:musicId',  
-  name:'music',  
+  name:'music',    
   component: resolve => require(['./component/music.vue'],resolve)  
 }  
 路由参数发生改变，但vue-router认为访问的是music.vue，由于music.vue已经渲染，所以直接复用，不会执行初始生命周期函数。  
@@ -119,6 +119,39 @@ watch:{
 		if(to.name=='music'){  
 			//执行初始化操作 （首次挂载路由监听无效，需created或mounted初始化）  
 		}  
+	}  
+}  
+## $nextTick  
+### 由来：  
+vue数据驱动视图更新，是异步的，及修改数据的当下，视图不会更新，等同一事件循环中所有数据变化完成后，在统一进行更新。  
+### 应用场景： 
+created、mounted操作渲染后的Dom，视图更新后对新的视图进行操作。 
+#### 实例：  
+\<span v-for="(item,index) in arr"\>{{item}}\<\/span\>  
+\<input type="text" name="" ref="btn" v-show='isShow'\>  
+\<button  @click="nexttickfun"\>push\<\/button\>   
+>data(){  
+	return {  
+		arr:[1,2,3,4,5],  
+		isShow:false  
+	}  
+},  
+created(){  
+	console.log(this.arr+'init')  
+	this.arr.push(6);  
+	console.log(this.arr+'push');  
+	
+	this.$nextTick(function(){  
+		this.$refs.btn.value='666';  
+	})  
+
+},  
+methods:{  
+	nexttickfun(){  
+		this.isShow=true;  
+		this.$nextTick(function(){  
+			this.$refs.btn.focus();   
+		})  
 	}  
 }  
 ## vue优化  
