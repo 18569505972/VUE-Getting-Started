@@ -18,7 +18,7 @@ vue实例从创建到销毁的过程，开始创建、初始化数据、编译�
 子：  
 (1)   
 父：  
-\<component msg='' v-bind:str='str' v-bind:arr='arr'\>\<\/component\\\>
+\<component msg='' v-bind:str='str' v-bind:arr='arr'\>\<\/component>
 export default {  
 	name:'app',  
 	data:{  
@@ -60,7 +60,7 @@ mounted(){
 ### 子组件向父组件传参：  
 (1) $emit   
 子：  
-\<component msg=''\ v-bind:str='str' v-bind:arr='arr' @click="childMsg">\<\/component\>
+\<component msg=''\ v-bind:str='str' v-bind:arr='arr' @click="childMsg">\<\/component>
 \<div\>{childmsg}\<\/div\>
 export default {  
 	name:'app',  
@@ -86,7 +86,7 @@ mounted(){
 }  
 (2)$refs、ref(渲染完成后生成)   
 父：  
- \<component ref="child" \>\<\/component\>
+ \<component ref="child" \>\<\/component>
 \<div\>{childmsg}\<\/div\>
 export default {  
 	name:'app',  
@@ -130,22 +130,20 @@ created、mounted操作渲染后的Dom，视图更新后对新的视图进行操
 \<span v-for="(item,index) in arr"\>{{item}}\<\/span\>  
 \<input type="text" name="" ref="btn" v-show='isShow'\>  
 \<button  @click="nexttickfun"\>push\<\/button\>   
->   
-data(){  
-	return {  
-		arr:[1,2,3,4,5],  
-		isShow:false  
-	}  
-},  
-created(){  
-	console.log(this.arr+'init')  
-	this.arr.push(6);  
-	console.log(this.arr+'push');  
-	this.$nextTick(function(){  
-		this.$refs.btn.value='666';  
-	})  
-
-},  
+>data(){  
+>>	return {  
+>>>		arr:[1,2,3,4,5],  
+>>>		isShow:false  
+>>	}  
+>},  
+>created(){  
+>>	console.log(this.arr+'init')  
+>>	this.arr.push(6);  
+>>	console.log(this.arr+'push');  
+>>	this.$nextTick(function(){  
+>>>		this.$refs.btn.value='666';  
+>>	})  
+>},  
 methods:{  
 	nexttickfun(){  
 		this.isShow=true;  
