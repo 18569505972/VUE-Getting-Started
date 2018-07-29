@@ -13,6 +13,11 @@ vue实例从创建到销毁的过程，开始创建、初始化数据、编译�
 实时监控数据变化，随时更新dom。  
 #### beforeDestroy-destroyed  
 解绑vue实例，移除事件监听器，销毁子实例。 
+## computed、watch、methods
+### 区别：
+computed：关联元素变化就调用  
+watch：键发生变化就调用    
+methods：满足条件时调用  
 ## 父子组件事件数据交互（$children获取所有子组件数组）    
 ### 父组件向子组件传参（props单向传递）：   
 (1)   
@@ -341,6 +346,12 @@ resolve => require(['@/components/name'],resolve)
 ```javascript
 require.ensure():r => require.ensure([],() => r(require('@/components/name'),'name'))  
 ```
+2、第三方插件运用cdn  
+### 代码优化：
+1、频繁切换场景使用v-show，其他场景尽量使用v-if，减少dom数量  
+2、for循环添加key  
+3、watch慎用deep：true（便利对象属性）   
+4、少用watcher    
 ## axios  
 ### 功能特性：
 1、在浏览器发送XMLHttpRequests请求（不是ajax）  
