@@ -13,6 +13,23 @@ vue实例从创建到销毁的过程，开始创建、初始化数据、编译�
 实时监控数据变化，随时更新dom。  
 #### beforeDestroy-destroyed  
 解绑vue实例，移除事件监听器，销毁子实例。 
+## vue实例属性  
+### vm.$el:挂载dom根元素  
+### vm.$data：data数据  
+### vm.$props:props数据  
+### vm.$options:vue实例初始化选项，（el,data,computed,watch,methods,directiv)
+### vm.$parent:父实例  
+### vm.$root：当前组件树的根实例  
+### vm.$children:子实例数组
+### vm.refs：拥有ref注册的子组件
+### vm.$solt:分发内容  
+#### 实例：
+```javascript
+公共模板：
+<button><solt></solt></button>
+调用：
+<v-button>btn</v-button>
+```
 ## computed、watch、methods
 ### 区别：
 computed：关联元素变化就调用  
