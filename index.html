@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue</title>
+</head>
+<body>
+	<div id="app">
+		<input type="text" v-model="message">
+		<span>{{message}}</span>
+		<button @click="toast">弹框</button>
+	</div>
+	<script type="text/javascript" src="./vue.js"></script>
+</body>
+<script>
+let app = new Vue({
+	el: "#app",
+	data: {
+		message: ''
+	},
+	methods:{
+		toast() {
+			alert(1)
+		}
+	}
+})
+</script>
+</html>
